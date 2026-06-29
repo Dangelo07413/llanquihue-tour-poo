@@ -1,0 +1,3 @@
+11111111-1;Juan Perez;Calle Del Salvador 450;Llanquihue;Guia;850000
+22222222-2;Maria Soto;Av Vicente Perez 12;Puerto Varas;Operador;1200000
+33333333-3;Carlos Munoz;Ruta V-505 Km 4;Llanquihue;Guia;900000
