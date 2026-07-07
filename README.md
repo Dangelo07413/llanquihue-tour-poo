@@ -3,25 +3,26 @@
 ## 🎯 Objetivo de esta semana
 El objetivo de esta actividad es implementar una jerarquía de herencia orientada a objetos para modelar los distintos servicios turísticos de la cuenca del Lago Llanquihue. Se busca aplicar conceptos de encapsulamiento, reutilización de código mediante la herencia, uso de constructores heredados con `super` y sobrescritura del método `toString()`.
 
-## 📂 Clases Creadas
-El proyecto se organizó de manera lógica y modular en los siguientes paquetes:
+# Llanquihue Tour App - Semana 7
 
-*   **`model/`** (Modelado del negocio):
-    *   `ServicioTuristico`: Superclase base con atributos comunes (`nombre`, `duracionHoras`).
-    *   `RutaGastronomica`: Subclase con el atributo específico `numeroDeParadas`.
-    *   `PaseoLacustre`: Subclase con el atributo específico `tipoEmbarcacion`.
-    *   `ExcursionCultural`: Subclase con el atributo específico `lugarHistorico`.
-*   **`data/`** (Persistencia y simulación de datos):
-    *   `GestorServicios`: Clase encargada de instanciar y proveer los objetos de prueba del catálogo de turismo.
-*   **`ui/`** (Capa de usuario):
-    *   `Main`: Clase principal que ejecuta el programa y renderiza los datos en la consola.
+## Descripción de lo desarrollado
+En esta séptima semana, se implementó el principio de polimorfismo y el uso de colecciones genéricas en el sistema.
+* Se ajustó la jerarquía de clases (`ServicioTuristico`, `RutaGastronomica`, `PaseoLacustre` y `ExcursionCultural`) sobrescribiendo el método `mostrarInformacion()` mediante la anotación `@Override`.
+* Se creó la clase `GestorServicios` dentro del paquete `data`, la cual almacena dinámicamente los servicios en una colección de tipo `List<ServicioTuristico>`.
+* Se implementó un recorrido polimórfico mediante un bucle *for-each* para desplegar la información específica de cada servicio por consola sin necesidad de utilizar `instanceof`.
 
-## 🚀 Instrucciones para ejecutar Main
+## Estructura del Proyecto
+* **`src/model`**: Clases de la jerarquía de servicios turísticos.
+* **`src/data`**: Clases de gestión de datos y colecciones (`GestorServicios`).
+* **`src/ui`**: Clase de interfaz de usuario (`Main`).
 
-### Requisitos previos
-*   Tener instalado el **JDK 11** o superior.
-*   Un IDE compatible (IntelliJ IDEA, Eclipse, NetBeans) o la terminal del sistema.
-
-### Ejecución desde IDE
-1.  Importa el proyecto `LlanquihueTourApp` en tu entorno de desarrollo.
-2.  Navega hasta la ruta `src/ui/Main.java`.
+## Instrucciones para compilar y ejecutar
+1. Asegúrate de tener instalado **Java 23** (o superior).
+2. Clona este repositorio en tu máquina local.
+3. Abre el proyecto en tu IDE preferido (se recomienda IntelliJ IDEA).
+4. Dirígete a la ruta `src/ui/Main.java`.
+5. Ejecuta el archivo presionando el botón **Run** (icono verde de reproducción) en tu IDE o mediante la consola con los comandos:
+   ```bash
+   javac src/ui/Main.java -d out/
+   java -cp out ui.Main
+   ```

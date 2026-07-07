@@ -7,12 +7,10 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("=== CATALOGO DE SERVICIOS TURISTICOS ===");
 
+        // 1. Instanciamos el gestor (que ya carga la lista automáticamente)
         GestorServicios gestor = new GestorServicios();
-        ServicioTuristico[] listaServicios = gestor.obtenerServiciosDePrueba();
 
-        // Recorremos el arreglo para mostrar la información en consola
-        for (ServicioTuristico servicio : listaServicios) {
-            System.out.println(servicio.toString());
-        }
+        // 2. Invocamos el método polimórfico que recorre la colección con for-each
+        gestor.mostrarTodosLosServicios();
     }
 }

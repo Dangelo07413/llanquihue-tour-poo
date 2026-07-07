@@ -1,6 +1,6 @@
 package model;
 
-public class ServicioTuristico {
+public abstract class ServicioTuristico {
     // Atributos protegidos para la herencia
     protected String nombre;
     protected double duracionHoras;
@@ -16,4 +16,5 @@ public class ServicioTuristico {
     public String toString() {
         return "Servicio: " + nombre + " | Duración: " + duracionHoras + " horas";
     }
+    public abstract void mostrarInformacion();
 }
