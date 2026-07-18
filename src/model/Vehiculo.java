@@ -12,9 +12,10 @@ public class Vehiculo implements Registrable {
     }
 
     @Override
-    public void mostrarResumen() {
-        System.out.println("[Vehículo] ID: " + identificador + " | Patente: " + patente + " | Capacidad: " + capacidad + " pasajeros");
+    public String mostrarResumen() {
+        return "[Vehículo] ID: " + identificador + " | Patente: " + patente + " | Capacidad: " + capacidad + " pasajeros";
     }
+
 
     public String getIdentificador() { return identificador; }
     public String getPatente() { return patente; }

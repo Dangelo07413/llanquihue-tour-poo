@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.io.PrintWriter;
 
 public class GestorDatos {
 
@@ -31,10 +32,13 @@ public class GestorDatos {
                 int sueldo = Integer.parseInt(partes[5]); // Convierte texto a número
 
                 // Arma las instancias correspondientes usando POO
-                Direccion dir = new Direccion(calle, comuna);
-                Empleado emp = new Empleado(rut, nombre, dir, rol, sueldo);
-
-                lista.add(emp);
+                try {
+                    Direccion dir = new Direccion(calle, comuna);
+                    Empleado emp = new Empleado(rut, nombre, dir, rol, sueldo);
+                    lista.add(emp);
+                } catch (exceptions.RutInvalidoException e) {
+                    System.out.println("Línea omitida por RUT inválido: " + e.getMessage());
+                }
             }
         } catch (IOException e) {
             System.out.println("Error al abrir o leer el archivo: " + e.getMessage());
@@ -48,8 +52,9 @@ public class GestorDatos {
     public boolean guardarEmpleadoEnArchivo(String rutaArchivo, Empleado emp) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaArchivo, true))) {
             String nuevaLinea = String.format("%s;%s;%s;%s;%s;%d",
-                    emp.getRut(), emp.getNombre(), emp.getDireccion().getCalle(),
-                    emp.getDireccion().getComuna(), emp.getRol(), emp.getSueldo());
+                    emp.getRut(), emp.getNombre(), emp.getDirection().getCalle(),
+                    emp.getDirection().getComuna(), emp.getRol(), emp.getSueldo());
+
 
             bw.write(nuevaLinea);
             bw.newLine();
@@ -57,6 +62,13 @@ public class GestorDatos {
         } catch (IOException e) {
             System.out.println("Error de escritura física: " + e.getMessage());
             return false;
+        }
+    }
+    public static void guardarLinea(String rutaArchivo, String linea) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(rutaArchivo, true))) {
+            writer.println(linea);
+        } catch (IOException e) {
+            System.out.println("Error al guardar en archivo: " + e.getMessage());
         }
     }
 }

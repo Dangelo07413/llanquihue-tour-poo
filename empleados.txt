@@ -1,0 +1,2 @@
+11111111-1;Ignacio Jimenez;Calle Prat 123;Llanquihue;Guia Local;750000
+22222222-2;Sonia Tapia;Av Los Colonos 450;Puerto Varas;Administrador;950000

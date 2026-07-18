@@ -1,16 +1,28 @@
 package ui;
 
+import javax.swing.JOptionPane;
+import data.GestorDatos;
+import model.Empleado;
 import data.GestorEntidades;
 import model.GuiaTuristico;
 import model.Vehiculo;
 import model.Registrable;
-import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
         GestorEntidades gestor = new GestorEntidades();
         boolean continuar = true;
 
+        GestorDatos gestorDatos = new GestorDatos();
+        ArrayList<Empleado> empleadosIniciales = gestorDatos.cargarEmpleados("C:\\Users\\Ideapad 330s\\IdeaProjects\\LlanquihueTourApp\\colaboradores.txt");
+
+
+        if (empleadosIniciales != null) {
+            for (Empleado emp : empleadosIniciales) {
+                gestor.agregarEntidad(emp);
+            }
+        }
         while (continuar) {
             String[] opciones = {"Registrar Guía Turístico", "Registrar Vehículo", "Mostrar Todos los Registros", "Salir"};
 
@@ -32,8 +44,12 @@ public class Main {
                     String nombreGuia = JOptionPane.showInputDialog("Ingrese el Nombre del Guía:");
                     String idiomaGuia = JOptionPane.showInputDialog("Ingrese el Idioma del Guía:");
 
-                    gestor.agregarEntidad(new GuiaTuristico(idGuia, nombreGuia, idiomaGuia));
-                    JOptionPane.showMessageDialog(null, "¡Guía registrado con éxito!");
+                    try {
+                        gestor.agregarEntidad(new GuiaTuristico(idGuia, nombreGuia, idiomaGuia));
+                        JOptionPane.showMessageDialog(null, "¡Guía registrado con éxito!");
+                    } catch (exceptions.RutInvalidoException e) {
+                        JOptionPane.showMessageDialog(null, "Error al registrar: " + e.getMessage(), "RUT Inválido", JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
 
                 case 1:
@@ -65,11 +81,18 @@ public class Main {
                                 resumenTexto.append("[VEHÍCULO] ID: ").append(v.getIdentificador())
                                         .append(" | Patente: ").append(v.getPatente())
                                         .append("\n -> Acción: Programar revisión técnica.\n\n");
+                            } else if (entidad instanceof Empleado) { // ⬅️ ¡Agregamos el soporte para tus colaboradores!
+                                Empleado e = (Empleado) entidad;
+                                resumenTexto.append("[EMPLEADO] RUT: ").append(e.getRut())
+                                        .append(" | Nombre: ").append(e.getNombre())
+                                        .append(" | Rol: ").append(e.getRol())
+                                        .append("\n -> Acción: Procesar sueldo base: $").append(e.getSueldo()).append("\n\n");
                             }
                         }
                     }
                     JOptionPane.showMessageDialog(null, resumenTexto.toString(), "Catálogo de Entidades", JOptionPane.INFORMATION_MESSAGE);
                     break;
+
 
                 case 3:
                 default:
