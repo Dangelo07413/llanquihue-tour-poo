@@ -6,7 +6,7 @@ import model.Empleado;
 import data.GestorEntidades;
 import model.GuiaTuristico;
 import model.Vehiculo;
-import model.Registrable;
+import interfaces.Registrable;
 import java.util.ArrayList;
 
 public class Main {
@@ -39,13 +39,24 @@ public class Main {
 
             switch (seleccion) {
                 case 0:
-                    String idGuia = JOptionPane.showInputDialog("Ingrese el ID del Guía:");
+                    String idGuia = JOptionPane.showInputDialog("Ingrese el ID (RUT) del Guía:");
                     if (idGuia == null) break;
+
                     String nombreGuia = JOptionPane.showInputDialog("Ingrese el Nombre del Guía:");
                     String idiomaGuia = JOptionPane.showInputDialog("Ingrese el Idioma del Guía:");
 
+                    // 1. Pedimos los datos indispensables para construir la Dirección
+                    String calleGuia = JOptionPane.showInputDialog("Ingrese la Calle de residencia:");
+                    String numeroGuiaStr = JOptionPane.showInputDialog("Ingrese el Número de casa/depto:");
+                    int numeroGuia = (numeroGuiaStr != null && !numeroGuiaStr.isEmpty()) ? Integer.parseInt(numeroGuiaStr) : 0;
+
                     try {
-                        gestor.agregarEntidad(new GuiaTuristico(idGuia, nombreGuia, idiomaGuia));
+                        // 2. Creamos la instancia de Dirección requerida por Persona
+                        model.Direccion direccionGuia = new model.Direccion(calleGuia, numeroGuiaStr);
+
+
+                        // 3. Enviamos los parámetros al constructor de GuiaTuristico
+                        gestor.agregarEntidad(new GuiaTuristico(idGuia, nombreGuia, direccionGuia, idiomaGuia));
                         JOptionPane.showMessageDialog(null, "¡Guía registrado con éxito!");
                     } catch (exceptions.RutInvalidoException e) {
                         JOptionPane.showMessageDialog(null, "Error al registrar: " + e.getMessage(), "RUT Inválido", JOptionPane.ERROR_MESSAGE);

@@ -1,5 +1,7 @@
 package model;
 
+import interfaces.Registrable;
+
 public class Vehiculo implements Registrable {
     private String identificador;
     private String patente;

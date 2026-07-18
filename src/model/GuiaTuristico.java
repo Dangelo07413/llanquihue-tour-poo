@@ -1,22 +1,23 @@
 package model;
 
-public class GuiaTuristico implements Registrable {
+import interfaces.Registrable;
+
+public class GuiaTuristico extends Persona implements Registrable {
     private String identificador;
-    private String nombre;
     private String idioma;
 
-    public GuiaTuristico(String identificador, String nombre, String idioma)throws exceptions.RutInvalidoException {
+    public GuiaTuristico(String identificador, String nombre, Direccion direccion, String idioma) throws exceptions.RutInvalidoException {
+        super(identificador, nombre, direccion);
         this.identificador = identificador;
-        this.nombre = nombre;
         this.idioma = idioma;
     }
 
     @Override
     public String mostrarResumen() {
-        return "[Guía] ID: " + identificador + " | Nombre: " + nombre + " | Idioma: " + idioma;
+        return "[Guía] ID: " + identificador + " | Nombre: " + getNombre() + " | Idioma: " + idioma;
     }
 
 
     public String getIdentificador() { return identificador; }
-    public String getNombre() { return nombre; }
+    public String getIdioma() { return idioma; }
 }
